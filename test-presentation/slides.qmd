@@ -134,10 +134,10 @@ format:
 
 - **Let** $u_i(d)$ be the disagreement utility for player $i$ and let $u_i^*(S)$ be the maximum payoff player $i$ can get in $S$ when the other receives at least $u_j(d)$.
 - **Kalai–Smorodinsky Solution** $KS(S,d)$ solves:
-  \[
+  $$
   \underset{x \in S}{\mathrm{argmax}}
   \;\;\min_{i} \left\{ \frac{u_i(x) - u_i(d)}{u_i^*(S) - u_i(d)} \right\}.
-  \]
+  $$
 - This ensures that both players’ relative gains (from disagreement to their ideal payoffs) are **equalized** and **maximized**.
 
 ---
@@ -299,15 +299,15 @@ format:
    - Because discounting reduces future value, the offering player has leverage to capture a slightly larger share if they can wait more patiently.
 2. **Equilibrium Shares**:  
    - In the classic solution, the share of the “pie” for Player A in period 0 is:
-     \[
+     $$
      x^* = \frac{1 - \delta_B}{1 - \delta_A \delta_B}
-     \]
+     $$
      and Player B gets $1 - x^*$.
    - Here, $\delta_A$ and $\delta_B$ are the discount factors for players A and B, respectively.
    - *Note*: If $\delta_A = \delta_B = \delta$, we get
-     \[
+     $$
      x^* = \frac{1 - \delta}{1 - \delta^2}.
-     \]
+     $$
 
 ---
 
