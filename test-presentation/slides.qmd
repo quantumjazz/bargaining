@@ -1,0 +1,840 @@
+---
+title: "Game-Theoretic Models of Bargaining"
+author: "ChatGPT"
+date: "2025-01-22"
+format: 
+  revealjs:
+    smaller: true
+    scrollable: true
+  
+---
+
+# Introduction & Motivation
+
+## Lecture Objectives
+- **Key Concepts**: Grasp the fundamental principles of bargaining in game theory.
+- **Approaches**: Compare cooperative (axiomatic) vs. non-cooperative (strategic) frameworks.
+- **Applications**: Understand how to employ these models in actual negotiation settings—ranging from mergers and acquisitions to policy-making.
+
+---
+
+## Real-World Examples and Importance
+
+### Business & Management
+- **Corporate Mergers**: Determining share allocations and management control when two companies merge.
+- **Supply Chain Negotiations**: Price, quantity, and delivery terms between manufacturers and retailers.
+- **Executive Compensation**: Salary, stock options, and severance packages negotiated by high-level executives.
+
+---
+
+### Politics & Policy
+- **International Treaties**: Climate accords (e.g., emission cuts), trade agreements (e.g., WTO negotiations).
+- **Legislative Bargaining**: Passing a budget bill with multiple stakeholders and party interests.
+- **Conflict Resolution**: Peace treaties and ceasefire negotiations in political conflicts.
+
+---
+
+### Everyday Life
+- **Real Estate Deals**: Setting a house price, deciding on repairs, or negotiating the closing date.
+- **Household Negotiations**: Splitting chores, deciding on family vacations.
+- **Car Purchases**: Bargaining with dealerships over loan rates, warranties, and trade-in values.
+
+
+---
+
+# The Cooperative (Axiomatic) Approach
+
+## 2.1 Defining the Bargaining Problem
+
+- A **bargaining problem** involves:
+  - A set of feasible outcomes, often denoted by $S \subset \mathbb{R}^n$
+  - A **disagreement (or threat) point** $d = (d_1, d_2, \dots, d_n)$  
+  - Each player’s **utility** (or payoff) is represented by $u_i(x)$ for outcome $x \in S$
+  
+- **Interpretation**:  
+  - If the players fail to reach an agreement, each player receives the **utility** (or payoff) corresponding to the disagreement point.  
+  - Example: In **union-labor wage negotiations**, if no deal is reached, workers might go on strike (utility = lost wages), and the firm’s profit may drop to zero or be severely reduced.
+
+- **Assumptions** (commonly used):
+  1. $S$ is **compact** (closed and bounded).
+  2. $S$ is **convex** (representing the idea that mixed strategies or compromises are possible).
+  3. $d \in S$ (the disagreement outcome is a point within the feasible set).
+  4. Utilities are typically **cardinal** (allowing for gains comparisons).
+
+---
+
+## Example: Two-Party Wage Negotiation
+
+- **Feasible set $S$**: All possible (wage, profit) combinations the firm and union can agree on.
+- **Disagreement point $d$**:  
+  - Union’s payoff if it strikes (e.g., partial wages from a strike fund or unemployment benefits).  
+  - Firm’s payoff (e.g., revenue loss during a strike, potential long-term reputation damage).
+- By formalizing $S$ and $d$, we can apply an **axiomatic solution** to propose a fair division of the surplus.
+
+---
+
+## 2.2 The Nash Bargaining Model
+
+### Key Axioms of the Nash Solution
+
+1. **Pareto Efficiency**: No other feasible agreement can make someone better off without making someone else worse off.  
+2. **Symmetry**: If the players are identical in all respects (utilities, threat points), they should share the surplus equally.  
+3. **Independence of Irrelevant Alternatives (IIA)**: Removing outcomes from $S$ that are never chosen should not change the agreement.  
+4. **Invariance to Equivalent Utility Representations**: If utilities are transformed linearly, the solution remains the same in the transformed space.
+
+---
+
+## Deriving the Nash Bargaining Solution
+
+- **Formal Definition**  
+  - The **Nash Bargaining Solution** $N(S,d)$ is given by  
+    $$
+    N(S,d) = \underset{x \in S}{\mathrm{argmax}} \;\; \prod_{i=1}^{n} \bigl(u_i(x) - u_i(d)\bigr)
+    $$ 
+  - In the 2-player case ($i=1,2$), this becomes  
+    $$
+    N(S,d) = \underset{x \in S}{\mathrm{argmax}} \;\; (x_1 - d_1)(x_2 - d_2).
+    $$
+
+- **Interpretation**:  
+  - The solution **maximizes** the product of each player’s **gain** from the disagreement point.  
+  - If one player’s gain is zero, the product is zero—capturing the idea that each side must get something better than its fallback option.
+
+---
+
+## Applying the Nash Solution: Examples
+
+- **Union-Firm Negotiations**  
+  - If the union’s disagreement payoff is low (weak fallback), it receives a smaller share.  
+  - If the firm’s fallback (e.g., ability to hire replacement workers) is weak, the union’s share increases.
+
+- **International Trade Agreement**  
+  - Countries negotiating tariff reductions each have a “no agreement” scenario (possibly imposing higher tariffs).  
+  - The Nash solution would maximize the joint gains from trade liberalization compared to the cost of defaulting to tariffs.
+
+- **Joint Venture Profit-Sharing**  
+  - Two companies forming a partnership to develop a new product:  
+    - *Disagreement point*: producing the product separately, or not producing it at all.  
+    - The Nash solution suggests how to split profits so that each company’s **marginal gain** over disagreement is maximized in a fair, product-of-gains sense.
+    
+---
+
+# 2.3 Other Axiomatic Solutions
+
+## 2.3.1 Kalai–Smorodinsky Bargaining Solution
+
+### Core Idea
+- **Focus on Proportional Gains**: Unlike the Nash solution (maximizing the product of gains), Kalai–Smorodinsky (K–S) maximizes the smallest ratio of individual gains to their respective ideal payoffs.
+- **Ideal Point**: Each player’s best possible payoff if the other player received at least their disagreement payoff.  
+- **Balance Principle**: The aim is to ensure both parties achieve the same proportion of their maximum possible gains.
+
+---
+
+### Formal Definition
+
+- **Let** $u_i(d)$ be the disagreement utility for player $i$ and let $u_i^*(S)$ be the maximum payoff player $i$ can get in $S$ when the other receives at least $u_j(d)$.
+- **Kalai–Smorodinsky Solution** $KS(S,d)$ solves:
+  \[
+  \underset{x \in S}{\mathrm{argmax}}
+  \;\;\min_{i} \left\{ \frac{u_i(x) - u_i(d)}{u_i^*(S) - u_i(d)} \right\}.
+  \]
+- This ensures that both players’ relative gains (from disagreement to their ideal payoffs) are **equalized** and **maximized**.
+
+---
+
+### Example: Wage Negotiations with Reference to “Ideal” Outcomes
+- Suppose the **union** wants a wage of \$25/hour (its maximum feasible payoff corresponds to \$27/hour), while the **firm** wants to keep costs low (its maximum feasible payoff is also known given the constraint that the union gets at least its disagreement wage).
+- If the K–S solution finds an outcome where each side’s gain to its maximum possible gain is **equal**, then both parties share the “pain” of not reaching their absolute ideal proportionally.
+- This can be seen as a **“fair compromise”** because it respects each party’s maximum feasible claim relative to their fallback position.
+
+---
+
+## 2.3.2 Egalitarian Solution
+
+### Key Principle
+- **Equalizing Utility Gains**: The Egalitarian solution demands that each player’s gain from the disagreement point be **identical**, i.e., $u_1(x) - u_1(d) = u_2(x) - u_2(d)$. 
+- Focus is on **absolute** equality of improvements from the fallback utilities rather than proportional fairness (as in K–S).
+
+---
+
+### Formal Statement
+- **Given** a bargaining set $S$ with disagreement point $d$, the **Egalitarian solution** $E(S,d)$ is:
+  $$
+  \underset{x \in S}{\mathrm{argmax}}
+  \;\;\left\{ u_1(x) \mid u_1(x) - u_1(d) = u_2(x) - u_2(d) \right\},
+  $$
+  subject to $x \in S$. In other words, you find the point in $S$ that **maximizes** the common gain while maintaining equality.
+
+---
+
+### Example: Dividing a Fixed Bonus Pool
+- Two managers must split a \$10,000 bonus pool (on top of a baseline salary):
+  - **Disagreement point**: Both managers receive \$0 of the bonus.  
+  - **Egalitarian approach**: Each manager gets the *same* absolute bonus above \$0 (like \$5,000 and \$5,000) if it’s feasible.
+- This approach ensures **no manager** is left feeling they received an “unfairly smaller” absolute share, although it *ignores* differences in maximum potential payoffs or outside options.
+
+---
+
+### Comparing Kalai–Smorodinsky and Egalitarian Solutions
+- **Kalai–Smorodinsky**:
+  - Balances **relative** distances to each party’s ideal payoff.
+  - Recognizes that one party’s maximum possible gain might be higher than the other’s.
+- **Egalitarian**:
+  - Balances **absolute** gains from the disagreement point (everyone gains equally in utility terms).
+  - Can overlook discrepancies in each side’s maximum claims or differing opportunity costs.
+
+# 3. Non-Cooperative Bargaining Models
+
+## 3.1 Foundations of Non-Cooperative Game Theory
+
+### Key Differences from the Cooperative Approach
+- **Explicit Strategies**: Players’ actions are fully specified (who proposes what, when, etc.).
+- **Individual Incentives**: Each player’s outcome depends on *others’* strategies, not just an agreed-upon rule or axiom.
+- **Solution Concepts**: Typically rely on **equilibrium** notions (e.g., Nash Equilibrium, Subgame Perfect Equilibrium) to predict outcomes.
+
+---
+
+### Basic Elements
+1. **Players**: Individuals or groups involved in the negotiation.
+2. **Actions / Strategies**: The set of possible moves (e.g., making offers, accepting/rejecting).
+3. **Timing / Sequence**: Who moves first, second, etc.; whether the game ends or continues after each move.
+4. **Outcomes / Payoffs**: Utility or profit each player receives from the eventual agreement (or disagreement).
+5. **Information**: What each player knows when choosing a strategy (full information, incomplete info, etc.).
+
+---
+
+### Strategic Form vs. Extensive Form
+
+#### Strategic (Normal) Form
+- **One-shot Representation**: Players choose strategies simultaneously (or as if simultaneously).
+- **Payoff Matrix**: Summarizes payoffs for every combination of strategies.
+- **Example**: A simplified stand-off between a supplier and a retailer each choosing a price or quantity strategy.
+
+#### Extensive Form
+- **Dynamic Representation**: Highlights the order of moves, possible actions at each node, and information sets.
+- **Tree Diagram**: Shows how the game progresses step by step.
+- **Example**: **Sequential** wage bargaining where the union proposes a wage, and the firm either accepts or rejects.
+
+---
+
+### Perfect vs. Imperfect Information
+- **Perfect Information**: Every move and payoff function is common knowledge, and each player knows the entire history of the game.
+  - *Example*: An alternating-offer wage bargaining scenario where both sides fully see each prior offer.
+- **Imperfect Information**: Some moves or payoffs may be hidden or uncertain, creating **information asymmetries**.
+  - *Example*: A buyer negotiating with a seller who may have private information about the true cost of production.
+
+---
+
+### Role of Time Preferences and Discounting
+- Most non-cooperative models of bargaining feature a **discount factor** $\delta$ (where $0 < \delta < 1$) to represent:
+  - **Impatience**: Future payoffs are worth less than immediate payoffs.
+  - **Opportunity Costs**: Delaying an agreement can lead to forgone profits or alternative deals.
+  - **Example**: In a **supplier-retailer** scenario, each day spent negotiating might mean lost sales; thus both sides prefer a quicker resolution if they have high discount factors.
+
+---
+
+### Subgame Perfect Equilibrium (SPE)
+- **Definition**: A refinement of Nash Equilibrium that requires players’ strategies to form a Nash Equilibrium *in every subgame* of the larger game.
+- **Importance**: Prevents **non-credible threats** or promises by ensuring rational play at each decision node.
+- **Illustration**: In a sequential bargaining game, any threat to “never accept an offer” unless certain conditions are met must be credible when the choice point is reached.
+
+---
+
+### Real-World Motivations
+- **Corporate Mergers**: Timing of offers and the possibility of walk-away can lead to extended negotiations.
+- **International Diplomacy**: Threats of sanctions or walk-outs must be credible to influence the other side’s proposal.
+- **Labor Disputes**: Strikes vs. lockouts; both unions and firms weigh how costly it is to wait (discount factor).
+
+---
+
+### Summary of Foundations
+- **Focus**: Identifying rational strategies under explicit sequential moves and payoffs.
+- **Mechanism**: Equilibrium concepts (Nash, SPE) predict how self-interested players will act.
+- **Next**: We apply these foundations to a classic **alternating-offer** model (Rubinstein) to see how time and patience determine negotiated outcomes.
+
+# 3.2 The Rubinstein Model
+
+## Core Structure
+
+- **Alternating Offers**: Two players, say A and B, take turns proposing how to split a “pie” (or surplus).
+- **Infinite Horizon**: The game continues potentially forever until agreement is reached.
+- **Discounting**: Each player’s payoff decreases over time at a rate determined by a discount factor $\delta \in (0,1)$.
+  - After each period of delay, a fraction $(1-\delta)$ of the pie’s value is effectively lost to impatience/opportunity costs.
+
+---
+
+## Timeline and Moves
+
+1. **Period 0**: Player A makes an offer $(x, 1-x)$ indicating the share for A and B.
+2. **Player B** can:
+   - **Accept**: Then the game ends, and payoffs are allocated immediately.
+   - **Reject**: The game moves to **Period 1**.
+3. **Period 1**: Player B proposes a new division $(y, 1-y)$.
+4. **Player A** can:
+   - **Accept** and end the game.
+   - **Reject**, leading to **Period 2**, where A proposes again.
+5. This alternation continues until an agreement is reached (or indefinitely).
+
+---
+
+## Key Assumptions
+
+- **Rationality**: Each player aims to maximize their *discounted* payoff.
+- **Perfect Information**: Both players know the structure of the game, each other’s discount factors, and all past offers.
+- **No Commitment**: A rejected offer ceases to exist. Players can’t force acceptance.
+
+---
+
+## Subgame Perfect Equilibrium (SPE)
+
+### Conceptual Overview
+- In **subgame perfect equilibrium**, each player’s strategy constitutes a **Nash Equilibrium** in *every possible subgame*.
+- For alternating offers:
+  - Each proposer anticipates how the responder will behave in future periods.
+  - Each responder anticipates the share they could secure if they reject.
+
+### Solving the Infinite Horizon Model
+1. **Backward Induction**:  
+   - Suppose we are in period $t$. If the other player expects to make an offer in period $t+1$, they will offer you just enough to make you indifferent between accepting and waiting.
+   - Because discounting reduces future value, the offering player has leverage to capture a slightly larger share if they can wait more patiently.
+2. **Equilibrium Shares**:  
+   - In the classic solution, the share of the “pie” for Player A in period 0 is:
+     \[
+     x^* = \frac{1 - \delta_B}{1 - \delta_A \delta_B}
+     \]
+     and Player B gets $1 - x^*$.
+   - Here, $\delta_A$ and $\delta_B$ are the discount factors for players A and B, respectively.
+   - *Note*: If $\delta_A = \delta_B = \delta$, we get
+     \[
+     x^* = \frac{1 - \delta}{1 - \delta^2}.
+     \]
+
+---
+
+## Intuition: The Power of Patience
+
+- **Higher Discount Factor $\delta$** = More patience.  
+  - A player with a higher $\delta$ can afford to wait longer for a better offer.
+- **Leverage in Bargaining**:  
+  - If Player A knows Player B has a lower discount factor (i.e., B is impatient), A can propose a division giving B just slightly above B’s discounted future expectation.
+- **Conclusion**: The more patient player secures a **larger share** in equilibrium.
+
+---
+
+## Practical Examples
+
+### Labor Negotiations
+- **Union vs. Management**:  
+  - Management may have a higher $\delta$ if it can hold out longer (e.g., it has stockpiled inventory, or fewer immediate cash-flow concerns).  
+  - The union, if it depends on daily wages, may accept a smaller share to avoid prolonged strikes.
+
+### Supplier–Retailer Disputes
+- **Payment Terms and Delivery Schedules**:  
+  - A large retailer (with many supplier options) might wait out the supplier, pushing for more favorable payment terms.  
+  - A smaller supplier with cash-flow constraints is less patient and might concede to keep production running.
+
+### Mergers & Acquisitions
+- **Buyout Negotiations**:  
+  - If a target firm believes a bidder is under time pressure (e.g., a new regulatory deadline or competing deals), it can hold out for a higher price.  
+  - Conversely, a target firm that risks losing other potential bidders may accept a lower premium if it’s impatient.
+
+---
+
+## Key Takeaways
+
+- **Alternating Offer Model**: A dynamic, strategic approach to bargaining that captures how time and patience affect negotiation outcomes.
+- **SPE Outcome**: Each side’s share depends on its relative discount factor—greater patience yields greater bargaining power.
+- **Real-World Relevance**: Reflects everyday negotiation scenarios where waiting is costly, but those who can afford to wait are advantaged.
+
+# 3.3 Extensions & Variants
+
+## 3.3.1 Finite vs. Infinite Horizon
+
+- **Finite Horizon**: The game ends after a predetermined number of periods (e.g., $T$).  
+  - **Implication**: The last mover in the final period has significant bargaining power, as the other player must accept or get nothing.  
+  - **Example**: A union-management contract negotiation with a legally imposed deadline (e.g., end of fiscal year).
+- **Infinite Horizon**: Negotiations can, in theory, continue forever.  
+  - Players’ **discount factors** and **expectations** about future offers shape each proposal.  
+  - *Rubinstein’s Model* is a classic infinite-horizon approach.
+
+---
+
+## 3.3.2 Asymmetric Discount Factors
+
+- **Unequal Patience**: If $\delta_A \neq \delta_B$, the more patient player (higher discount factor) captures a larger share.  
+- **Source of Asymmetry**: Financial constraints, alternative opportunities, or urgent external pressures.  
+  - *Example*: A small startup (lower $\delta$) negotiating with a large corporation (higher $\delta$) over a software licensing deal.
+- **Practical Note**: Identifying each side’s **time sensitivity** can be crucial—knowing the other’s patience can shift negotiation strategy significantly.
+
+---
+
+## 3.3.3 Outside Options and Threat Points
+
+- **Outside Option**: A fallback arrangement a player can implement if the current negotiation fails.  
+  - *Example*: A supplier might have an alternative buyer waiting at a certain price.  
+  - If an outside option is **credible**, it strengthens that player’s bargaining position.
+- **Threat Point (or Reservation Value)**: The payoff a player can guarantee themselves by unilaterally leaving the negotiation.  
+  - *Example*: A homeowner negotiating with a contractor can switch to a competing firm if the offer exceeds their budget or comfort zone.
+
+### Adjusting the Model
+- In an **alternating-offers** framework, if a player’s outside option yields a payoff $v_i$ at any point, that player must secure at least $v_i$ in the bargain—or they walk away.
+- Can lead to *faster agreements* or *breakdowns*, depending on how credible and attractive these alternatives are.
+
+---
+
+## 3.3.4 Bargaining with Incomplete Information
+
+- **Asymmetric Information**: One player may be uncertain about the other’s valuation, discount factor, or outside options.
+- **Signaling & Screening**: Offers can reveal information about impatience or valuations.
+  - *Example*: A used-car seller might set a firm price to signal high quality, while a buyer might bid low to test the seller’s reservation price.
+- **Outcome**: Delay often arises because each side uses **rejections** to learn about the other’s private info or bluff.
+
+---
+
+## 3.3.5 Real-World Applications
+
+1. **Corporate Takeovers**  
+   - **Bidder** might conceal its true valuation of the target to avoid overpaying.  
+   - **Target** might prolong negotiations to get a better sense of the bidder’s willingness to pay.
+
+2. **Political Negotiations**  
+   - **Coalition Formation**: Multiple parties with different discount factors for forming a government.  
+   - **Hidden Agendas**: Players may delay or propose certain policies to gauge opponents’ true priorities.
+
+3. **Supplier-Retailer with Outside Contracts**  
+   - Supplier might be negotiating with multiple retailers, each not fully aware of the exact terms the supplier can get elsewhere.  
+   - Retailers might test the supplier’s patience by making low offers initially.
+
+---
+
+## Key Takeaways
+
+- Non-cooperative bargaining can be **refined** to address real-world complexities—finite deadlines, asymmetric patience, outside options, and incomplete information.
+- **Strategic Delay** often emerges naturally as players learn about each other’s valuations and patience levels.
+- Understanding these **extensions** helps anticipate negotiation hurdles and craft more effective strategies.  
+
+# 4. Comparative Insights & Applications
+
+## 4.1 Comparing Cooperative vs. Non-Cooperative Outcomes
+
+- **Nature of Agreements**  
+  - **Cooperative (Axiomatic)**:  
+    - Outcomes are guided by principles like fairness, symmetry, or efficiency.  
+    - Implicit assumption of enforceable contracts or external mechanisms ensuring the agreement is upheld.  
+  - **Non-Cooperative (Strategic)**:  
+    - Equilibrium-based results emerge from explicit offers, threats, and counteroffers.  
+    - No external enforcement; each outcome must be self-enforcing (credible in equilibrium).
+
+- **Consistency vs. Credibility**  
+  - **Cooperative models** often highlight which agreement is *“fair”* or *“efficient”* based on axioms.  
+  - **Non-cooperative models** show how real negotiations might break down or delay if an outcome isn’t credible under rational self-interest.
+
+- **When Do They Coincide?**  
+  - Under certain conditions (e.g., when discount factors and threat points are clearly defined), non-cooperative solutions (like Rubinstein’s) may yield outcomes akin to the Nash bargaining solution.  
+  - This overlap suggests that cooperative solutions can be interpreted as *equilibrium outcomes* in specific non-cooperative settings.
+
+---
+
+## 4.2 Empirical & Experimental Evidence
+
+- **Laboratory Experiments**  
+  - **Alternating-Offer Games**: In many lab settings, subjects approximate subgame-perfect predictions—particularly if they are experienced or if the stake is high.  
+  - **Ultimatum Game**: While theory predicts responders should accept any positive offer, *fairness norms* often lead to rejections of “unfair” splits (contrary to strict rational predictions).
+
+- **Behavioral Deviations**  
+  - **Bounded Rationality**: Individuals may not backward-induct fully or struggle with complex calculations.  
+  - **Fairness Preferences** (e.g., Fehr & Schmidt’s inequity aversion): People might reject or propose offers that deviate from purely self-interested splits.  
+  - **Time-Inconsistent Preferences**: Negotiators might exhibit higher impatience for immediate gains than predicted by a constant discount factor.
+
+- **Field Studies**  
+  - **Union-Firm Wage Negotiations**: Often show a mix of “cooperative” outcomes (meeting halfway) and “strategic posturing” (threatening strikes or lockouts) before settling.  
+  - **Corporate Takeovers**: Empirical data reveals that more patient firms often secure better deals, consistent with the theory that higher discount factors yield more favorable terms.
+
+---
+
+## 4.3 Practical Applications
+
+### Business and Management
+- **Contract Design & Renegotiation**  
+  - Incorporate **explicit deadlines**, penalty clauses, or incentives to reduce strategic delays.  
+  - Use **outside option** analysis to determine leverage points.
+- **Pricing & Supply Chain**  
+  - Large retailers often exploit their patience advantage in repeated negotiations with smaller suppliers.  
+  - Suppliers counter by developing alternative markets or unique product offerings to boost their outside option.
+
+---
+
+### Political Economy & Legislative Bargaining
+- **Coalition Formation**  
+  - Parties negotiate cabinet positions or policy priorities; discount factors capture each party’s urgency to form a government.  
+  - Smaller parties with high patience (or essential votes) often secure disproportionate policy influence.  
+- **Budget Negotiations**  
+  - Threat of government shutdown or missed legislative deadline introduces finite horizon pressures.  
+  - Negotiations often end at the last minute, aligning with finite-horizon predictions where final offers hold the most sway.
+
+---
+
+### Labor Markets
+- **Union–Management Disputes**  
+  - **Strike Costs** reduce the total value of the “pie,” effectively lowering the discount factor for both sides over time.  
+  - Incentive to settle early if the mutual loss from a prolonged dispute is significant.  
+- **Executive Compensation**  
+  - **Board of Directors** (often representing shareholders) vs. **CEO candidates**: The CEO’s outside options (competitive offers) raise her bargaining power.  
+  - A firm with urgent need for leadership (lower patience) may concede higher compensation packages.
+
+---
+
+## Key Lessons
+- **Strategic vs. Fairness Perspectives**: Negotiators must account for both the *strategic leverage* (discount factors, outside options) and *perceived fairness* to reach stable, acceptable deals.  
+- **Policy & Organizational Design**: Setting rules (deadlines, penalties) can guide negotiations toward faster, more efficient outcomes.  
+- **Empirical Observations**: Real-world bargaining often blends rational strategy, fairness norms, and time constraints—highlighting the complexity of applying game-theoretic models in practice.
+
+# 5. Advanced Topics & Current Research
+
+## 5.1 Incomplete Information & Signaling
+
+### Asymmetric Information in Bargaining
+- **Definition**: At least one party holds private information about their valuation, discount factor, or outside options.
+- **Impact**:  
+  - Negotiations can become more **protracted** as each side tests the other’s true parameters (bluffing, screening).
+  - Agreements might **fail** or be delayed because the informed party may try to hide (or exaggerate) its fallback position.
+
+---
+
+### Signaling and Screening
+
+1. **Signaling**: The informed party takes an action to convey credible information.  
+   - *Example*: A seller sets a high price to signal high quality (risking fewer buyers if it’s too high).
+
+2. **Screening**: The uninformed party designs tests or mechanisms to elicit information.  
+   - *Example*: A buyer might propose a take-it-or-leave-it offer at a low price, gauging if the seller’s true cost is higher or lower than stated.
+
+---
+
+### Models of Bargaining with Incomplete Information
+- **Sequential Screening**: Bargainers update beliefs after each reject or accept decision.  
+- **Costly Delay**: Prolonging negotiations can be a way to learn about the other side’s type—yet both sides incur discount costs.  
+- **Example**:  
+  - In **M&A deals**, the seller might withhold detailed financials until certain negotiation milestones are reached.  
+  - The buyer, unsure of the true cash flows, bids cautiously, leading to strategic back-and-forth proposals.
+
+---
+
+### Practical Implications
+- **Importance of Credible Disclosure**: If the informed party can credibly reveal private info (e.g., audited statements), it might avoid costly delays.  
+- **Risk of Misrepresentation**: Lack of trust can lead to “breakdowns” or suboptimal outcomes if each side remains skeptical.  
+- **Designing Mechanisms**: Negotiation protocols, escrow accounts, or verification clauses can help mitigate information gaps and speed up agreement.
+
+
+# 5.2 Multilateral Bargaining
+
+## Multilateral vs. Bilateral Settings
+- **Multiple Players**: Now more than two agents (e.g., firms, countries, or political parties) are negotiating.
+- **Complex Dynamics**: 
+  - Forming **coalitions** or **alliances** can change the balance of power.  
+  - Offers may target subsets of players to secure majority support (e.g., in legislative voting).
+- **Side Payments & Transfers**: Agreements might involve compensating coalition partners or redistributing surplus among several parties.
+
+---
+
+## Coalition Formation & the Shapley Value
+
+### Coalition Formation
+- **Objective**: Groups of players (coalitions) join forces to increase their joint payoff relative to acting alone.
+- **Stability**: A coalition is stable if no subgroup can deviate and achieve a better outcome on its own.
+- **Real-World Example**:
+  - **Trade Blocs** (e.g., USMCA, EU): Countries form trading coalitions to gain better market access and shared benefits.
+  - **Corporate Alliances**: Three or more tech firms collaborate on shared research to reduce costs and pool knowledge.
+
+### Shapley Value
+- **Definition**: A method to distribute the total coalition payoff among members based on their *marginal contributions*.
+- **Formula** (for $n$ players):
+  $$
+  \phi_i(v) = \sum_{S \subseteq N \setminus \{i\}}
+  \frac{|S|!(n - |S| - 1)!}{n!}
+  \bigl(v(S \cup \{i\}) - v(S)\bigr)
+  $$
+  where $v(S)$ is the value function for coalition $S$.
+- **Interpretation**: Each player’s payoff is the *average marginal value* they bring to every possible coalition ordering.
+- **Use Case**: 
+  - **Joint Ventures**: Splitting the proceeds of a multi-partner R&D project.  
+  - **Revenue-Sharing in Sports Leagues**: Teams pool broadcasting revenues, then allocate funds based on their contribution to league popularity.
+
+---
+
+## Legislative Bargaining & Application to Politics
+
+- **Models of Legislative Bargaining** (e.g., Baron–Ferejohn model):
+  - A **proposer** suggests how to divide a budget or surplus among all members of a legislature.
+  - The legislature votes to accept or reject. If rejected, another random legislator proposes a new division in the next round.
+  - **Delay Costs**: Time spent without a budget can be costly (e.g., government shutdowns, public disapproval).
+- **Example**: 
+  - **U.S. Congress** negotiating a federal budget or infrastructure bill. Key committees control the proposal, and each faction seeks to secure funds for its constituents.
+  - **European Parliament** deciding on subsidies where multiple parties form minimum winning coalitions by offering side payments or policy concessions.
+
+---
+
+## Logrolling and Side Deals
+
+- **Logrolling**: Parties exchange support on issues they value differently.  
+  - *Example*: One party wants agricultural subsidies, another wants defense spending, so they “trade” votes.
+- **Side Payments**: Monetary or policy concessions used to win over pivotal coalition members.  
+  - *Example*: In a corporate board with diverse shareholders, a major stakeholder might promise future board positions or additional equity stakes to smaller stakeholders to secure agreement on a major merger.
+
+---
+
+## Negotiation Dynamics with Three or More Players
+
+1. **Sequential Proposals**: Similar to bilateral alternating offers, but the proposer may allocate shares to multiple players.
+2. **Voting Rules**: Unanimity vs. majority vote can drastically change bargaining power.  
+   - *Unanimity*: Any one player can block the deal, increasing each individual’s leverage.  
+   - *Simple Majority*: A coalition of half the players plus one can pass the proposal.
+3. **Credibility of Threats**: With multiple potential partners, a threat to exclude a player from the coalition must be credible if that player’s participation is deemed non-essential.
+
+---
+
+## Real-World Case Studies
+
+1. **Global Climate Agreements**  
+   - Over 190 countries negotiating emission targets.  
+   - Developing vs. developed nations form coalitions to secure better terms or financial aid.  
+   - Side payments often come in the form of technology transfers or climate finance funds.
+
+2. **Mergers Among Multiple Firms**  
+   - If three or more companies consider merging, each one’s synergy potential (added value) differs.  
+   - A firm might be left out if it contributes less synergy or demands too large a share of the combined profit.
+   
+   
+# 6. Summary & Key Takeaways
+
+## 6.1 Core Principles
+
+- **Bargaining Environments**:  
+  - From **cooperative** (axiomatic) frameworks that focus on fairness and efficiency axioms  
+  - To **non-cooperative** models emphasizing strategic offers, time preferences, and subgame perfect equilibria  
+
+- **Trade-Offs & Assumptions**:  
+  - Cooperative models assume enforceable agreements or external enforcement  
+  - Non-cooperative models rely on individual incentives, with outcomes determined by equilibrium logic  
+
+- **Role of Patience & Threats**:  
+  - **Discount factors** and **outside options** are key to understanding negotiation power  
+  - **Credible threats** and offers shape final outcomes in sequential bargaining setups  
+
+---
+
+## 6.2 Practical Lessons
+
+1. **Outside Options & Fallback Positions**  
+   - A strong outside option increases leverage, often improving one’s share of the surplus.  
+   - *Real-Life Tip*: Cultivate alternatives (e.g., multiple job offers, multiple suppliers) to bolster negotiation stance.
+
+2. **Importance of Timely Agreements**  
+   - In non-cooperative models, waiting can be costly due to discounting.  
+   - *Real-Life Tip*: Use deadlines or penalty clauses to reduce strategic delay, encouraging faster settlements.
+
+3. **Fairness & Social Preferences**  
+   - Fairness norms and behavioral biases frequently override purely “rational” strategies.  
+   - *Real-Life Tip*: Incorporate fair division principles or reciprocity norms to achieve more stable agreements.
+
+4. **Coalition Building**  
+   - In multilateral contexts, forming coalitions or alliances can be crucial to securing majority support.  
+   - *Real-Life Tip*: Identify pivotal players and determine effective side payments or policy concessions to form winning coalitions.
+
+---
+
+## 6.3 Integrating Theory & Empirical Insights
+
+- **Lab Experiments**: Show partial support for equilibrium predictions (e.g., in alternating-offer games), but also reveal *fairness* and *bounded rationality* effects.
+- **Field Data**: Confirms that bargaining power often hinges on outside options, impatience, and credibility of threats (e.g., real union-firm negotiations, M&A).
+- **Behavioral Factors**: Ultimatum game studies highlight deviations from pure self-interest, underscoring the need to incorporate psychology into advanced models.
+
+---
+
+## 6.4 Future Directions & Open Questions
+
+- **Behavioral Game Theory**: Continued research on how cognitive limits and social preferences systematically alter bargaining outcomes.
+- **Technological Shifts**: Online platforms (e.g., digital marketplaces) may change negotiation dynamics by providing quick comparisons or automated bidding systems.
+- **Algorithmic/AI Negotiators**: AI-driven strategies that can adapt to or learn from human biases, raising questions about fairness and ethics in automated bargaining.
+
+---
+
+## 6.5 References & Suggested Readings
+
+- **Core Texts**  
+  - *Bargaining and Markets* by M. Osborne & A. Rubinstein  
+  - *Game Theory for Applied Economists* by R. Gibbons  
+  - *The Strategy of Conflict* by T. Schelling  
+- **Academic Articles**  
+  - Nash’s original paper: *The Bargaining Problem (Econometrica, 1950)*  
+  - Rubinstein’s *Perfect Equilibrium in a Bargaining Model (Econometrica, 1982)*  
+  - Baron & Ferejohn’s model of legislative bargaining (*American Political Science Review, 1989*)  
+- **Behavioral Insights**  
+  - *Thinking, Fast and Slow* by D. Kahneman (on biases and decision-making)  
+  - Fehr & Schmidt (1999) on inequity aversion in *Quarterly Journal of Economics*
+
+---
+
+## 6.6 Key Takeaways
+
+- Understanding both **cooperative** and **non-cooperative** frameworks equips negotiators to analyze diverse bargaining scenarios.
+- **Patience, threats, fairness, and outside options** are the pillars shaping negotiation outcomes.
+- In practice, real negotiations blend **strategic** considerations with **behavioral** nuances, calling for a multi-dimensional approach to effective bargaining.
+
+
+3. **Project Alliances in Construction or Oil & Gas**  
+   - Multiple contractors and suppliers form a joint venture for a massive project (e.g., building a pipeline).  
+   - The negotiation includes cost allocation, risk-sharing clauses, and penalty distributions.
+
+---
+
+## Key Takeaways
+
+- **Multilateral Bargaining** introduces complexity: coalition-building, voting thresholds, and side payments shape outcomes.
+- **Stability & Fair Division**: Concepts like the Shapley value address how to distribute gains in a way that keeps coalitions intact.
+- **Strategic Proposals**: Players exploit or mitigate delay, form pivotal coalitions, and exchange votes or resources to reach an agreement.
+
+
+# 5.3 Behavioral and Psychological Factors
+
+## Bounded Rationality & Cognitive Biases
+
+- **Bounded Rationality**: Humans have limited computational abilities and often rely on heuristics.  
+  - *Example*: In **wage bargaining**, negotiators may not perfectly compute subgame perfect strategies. Instead, they use *rules of thumb* like “always counteroffer 10% higher” or “split the difference.”
+- **Anchoring Bias**: The first numerical offer often anchors subsequent counteroffers.  
+  - *Example*: In a **real estate negotiation**, if a seller lists a house at \$500,000, buyers often adjust their counteroffers around that anchor—even if the true market value is lower.
+
+---
+
+## Fairness and Ultimatum Game Insights
+
+- **Ultimatum Game**:  
+  - One player proposes how to divide a sum of money, and the other player can accept (both get the proposed shares) or reject (both get nothing).  
+  - *Standard Theory*: The responder should accept *any* positive amount, leading the proposer to offer the bare minimum.  
+  - *Empirical Reality*: Many responders reject “unfair” offers (e.g., receiving 10% or less), suggesting social norms of fairness influence behavior.
+
+- **Application to Business**:  
+  - **Partner Compensation**: A senior partner offering a junior partner a negligible fraction of profits risks the junior walking away—even if a small share is better than zero.  
+  - **Supply Chain**: A major retailer offering a supplier an unfairly low price might face hostility, quality issues, or reputational damage if the supplier rejects out of principle.
+
+---
+
+## Reference Points & Prospect Theory
+
+- **Reference Dependence**: People evaluate outcomes as gains or losses relative to a reference point (e.g., expected salary, listed house price).  
+- **Loss Aversion**: Losses weigh more heavily than equivalent gains, prompting risk-averse or aggressive stances to avoid a perceived loss.  
+  - *Example*: A manager who *expects* a 5% raise might strongly resist any offer below that, even if a 4% raise is still a net gain over the previous salary.
+
+- **Prospect Theory in Negotiations**:  
+  - Negotiators frame offers in terms of preventing losses or locking in gains.  
+  - *Example*: Real estate agents might present a slightly lower offer to a seller as a “loss” from the list price—triggering the seller’s reluctance to accept.
+
+---
+
+## Emotions & Social Preferences
+
+- **Emotions**: Anger, pride, or empathy can override purely rational calculations.  
+  - *Example*: A CEO who feels *insulted* by a lowball acquisition offer might break off talks altogether, even if an improved future offer might be profitable.
+- **Social Preferences**:  
+  - **Inequity Aversion**: People prefer more equal splits, sometimes punishing “greedy” behavior at a personal cost.  
+  - **Reciprocity**: Generous treatment early in a negotiation can foster goodwill and more cooperative outcomes later.  
+  - *Example*: **Firm–Employee Relations**: A boss who rewards employees fairly might reduce turnover and wage disputes, even if it’s slightly costlier in the short run.
+
+---
+
+## Behavioral Contract Design
+
+- **Nudges & Defaults**: Setting automatic enrollment or standard contract terms that align with equitable outcomes.  
+  - *Example*: **Employee Benefit Plans** often use opt-out structures so employees must actively refuse, boosting participation.
+- **Framing Effects**: Presenting gains rather than losses can reduce resistance.  
+  - *Example*: In **car price negotiations**, a salesperson might highlight “discounts off the MSRP” instead of focusing on the out-of-pocket cost, leveraging positive framing.
+
+---
+
+## Real-World Illustrations
+
+1. **M&A “Culture Fit”**  
+   - Acquiring firms often fear culture clashes; emotional and psychological factors can derail deals if key managers feel overshadowed or undervalued.
+2. **International Diplomacy**  
+   - Diplomatic standoffs often hinge on national pride and face-saving. Leaders may prefer a detrimental stalemate over making *concessions* perceived as humiliating to their constituency.
+3. **Consumer Contract Renegotiations**  
+   - Telecom or insurance customers calling to reduce rates often rely on a “fairness argument” (“I’ve been a loyal customer for years!”) rather than purely rational cost–benefit analysis.
+
+---
+
+## Key Takeaways
+
+- **Behavioral Factors**: Negotiations are not purely rational. Cognitive biases, fairness norms, and emotions play significant roles.
+- **Practical Relevance**: Recognizing these *psychological levers* can improve negotiation outcomes or design better contracts.
+- **Integrating Theory & Behavior**: Incorporating *bounded rationality* and *social preferences* into formal models remains a vibrant research area, bridging classical game theory and behavioral economics.
+
+
+# 7. Interactive Exercise / Discussion
+
+## 7.1 In-Class Simulation: Alternating Offers
+
+### Objective
+- Experience first-hand how time preference and outside options affect bargaining outcomes.
+
+### Setup
+1. **Form Pairs**: Each pair will act as Player A and Player B.
+2. **Disagreement Value**: If no agreement is reached after a fixed number of rounds (or time limit), both players receive \$0.
+3. **Discount Factor**: 
+   - Assign a distinct discount factor $\delta_A$ to Player A and $\delta_B$ to Player B (e.g., $\delta_A=0.9$, $\delta_B=0.7$) to reflect different levels of impatience.
+4. **Rounds**: Each round, the current proposer makes a take-it-or-leave-it offer:
+   - A percentage split of a \$100 pie.
+   - If the responder rejects, move to the next round.
+   - After 3 rounds, if still no agreement, payoff is \$0 each (or minimal payoff as a final fallback).
+
+### Process
+- **Record Offers**: Each team should note down every proposal, acceptance, or rejection.
+- **Observe**: Does the more patient player secure a better deal? Are there “fairness” or “anchoring” effects in your group?
+
+### Debrief
+- Discuss how actual outcomes compare to the **Rubinstein model** prediction:
+  - Did impatience or risk-aversion lead to early acceptance of suboptimal offers?
+  - Were threats of continued negotiation credible?
+  - Did fairness norms cause deviations from the strictly rational shares?
+
+---
+
+## 7.2 Discussion Questions
+
+1. **Fairness vs. Rationality**: 
+   - In practice, did players propose or accept divisions that seem more “fair” than strictly optimal?
+   - How did the class’s offers align or diverge from the subgame perfect equilibrium?
+
+2. **Role of Outside Options**: 
+   - Imagine if one player had a guaranteed \$20 if they walked away. How would that shift the bargaining dynamics?
+
+3. **Time Constraints / Deadlines**: 
+   - If there was a firm deadline (e.g., 10 minutes, or 3 rounds max), how did that influence offers?
+   - Did “last-minute” proposals force acceptance of less favorable terms?
+
+4. **Multilateral Extensions**: 
+   - If you had a **three-player** game, how would forming temporary alliances or offering side payments alter the process?
+
+5. **Behavioral Factors**:
+   - Were there any emotional reactions to certain proposals?
+   - Did initial anchors or reputational concerns play a noticeable role?
+
+---
+
+## 7.3 Application Ideas
+
+- **Business Context**: 
+  - Encourage students to apply these exercises in **vendor negotiations**, **salary discussions**, or **team project resource allocations**.
+
+- **Policy & Diplomacy**: 
+  - Use a **mock legislative debate** where students propose budget allocations or policy amendments, requiring majority approval.
+
+- **Organizational Challenges**: 
+  - Simulate **departmental resource sharing** in a corporation, where each department has a distinct fallback option (e.g., alternative funding).
+
+---
+
+## 7.4 Conclusion of the Exercise
+
+- **Key Insight**: Real-world bargaining often mixes strategic equilibrium reasoning with behavioral biases and fairness considerations.
+- **Reflective Note**: By actively participating, students see the tension between *“what is theoretically optimal?”* and *“what actually happens in a live negotiation?”*.
+- **Looking Forward**: Continued practice with such simulations helps refine both your **strategic mindset** and **empathy for counterpart perspectives**—critical skills for any effective negotiator.
